@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run SSE-RPC Server",
+            "type": "deno",
+            "command": "run",
+            "args": [
+                "-A",
+                "-r",
+                "--unstable",
+                "https://raw.githubusercontent.com/nhrones/SSE-RPC/master/server.ts"
+            ],
+            "problemMatcher": [
+                "$deno"
+            ],
+        },
+        {
+            "label": "Run LOCAL SSE-RPC Server",
+            "type": "deno",
+            "command": "run",
+            "args": [
+                "-A",
+                "-r",
+                "--unstable",
+                "C:/Users/nhron/dev/devtools/SSE-RPC/server.ts"
+            ],
+            "problemMatcher": [
+                "$deno"
+            ],
+        },
+    ]
+}
