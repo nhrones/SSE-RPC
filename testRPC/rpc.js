@@ -10,7 +10,7 @@ const ctx = {
   folderName: ""
 };
 
-var log;
+let log;
 
 const callbacks = /* @__PURE__ */ new Map();
 let nextMsgID = 0;

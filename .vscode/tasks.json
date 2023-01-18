@@ -29,5 +29,16 @@
                 "$deno"
             ],
         },
+        {
+         "label": "Run SSE-RPC Sample",
+         "type":"shell",
+         "command": "simpleL",
+         "args": [
+             "testRPC"
+         ],
+         "problemMatcher": [
+             "$deno"
+         ],
+     },
     ]
 }
