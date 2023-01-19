@@ -1,5 +1,4 @@
 // deno-lint-ignore-file
-import {log} from './dom.js'
 //const serverURL = "https://github.com/nhrones/SSE-RPC/blob/master/server.ts"
 //const serverURL = "https://raw.githubusercontent.com/nhrones/SSE-RPC/master/server.ts"
 const serverURL = "http://localhost:9000"
@@ -12,7 +11,7 @@ const ctx = {
 };
 
 const callbacks = new Map();
-
+let log;
 let nextMsgID = 0;
 
 /** 
@@ -39,8 +38,8 @@ export const Call = (procedure, params) => {
    });
 };
 
-export const Initialize = () => {
-
+export const Initialize = (log = null) => {
+   log = log || console.log
    return new Promise((resolve, reject) => {
       const events = new EventSource(serverURL + "/rpc_registration");
       log("CONNECTING");

@@ -6,9 +6,7 @@ import {
    outPut,
 } from './dom.js'
 
-//import { initComms, arpcCall } from './arpcClient.js'
-
-import * as ARPC from './arpcClient.js'
+import * as ARPC from '../src/client/arpcClient.js'
 
 const testFolder = 'example';
 const testFileName = './test.txt';
@@ -78,7 +76,7 @@ saveFile.onclick = () => {
    .catch((e) => log(e));
 };
 
-ARPC.Initialize().then(() => {
+ARPC.Initialize(log).then(() => {
    log("Initialized ARPC services!");
 });
 
