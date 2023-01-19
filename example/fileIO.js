@@ -6,7 +6,7 @@ import {
    outPut,
 } from './dom.js'
 
-import * as ARPC from '../src/client/arpcClient.js'
+import * as ARPC from './client/arpcClient.js';
 
 const testFolder = 'example';
 const testFileName = './test.txt';
