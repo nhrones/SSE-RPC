@@ -1,1 +1,1 @@
-You can edit then save this text in test.txt.
+You can edit this test.txt.
