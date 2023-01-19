@@ -38,8 +38,8 @@ export const Call = (procedure, params) => {
    });
 };
 
-export const Initialize = (log = null) => {
-   log = log || console.log
+export const Initialize = (logger = null) => {
+   log = logger || console.log
    return new Promise((resolve, reject) => {
       const events = new EventSource(serverURL + "/rpc_registration");
       log("CONNECTING");

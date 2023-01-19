@@ -9,7 +9,7 @@
                 "-A",
                 "-r",
                 "--unstable",
-                "https://raw.githubusercontent.com/nhrones/SSE-RPC/master/src/server/server.ts"
+                "https://raw.githubusercontent.com/nhrones/SSE-RPC/master/src/server.ts"
             ],
             "problemMatcher": [
                 "$deno"
@@ -23,7 +23,7 @@
                 "-A",
                 "-r",
                 "--unstable",
-                "C:/Users/nhron/dev/devtools/SSE-RPC/src/server/server.ts"
+                "C:/Users/nhron/dev/devtools/SSE-RPC/src/server.ts"
             ],
             "problemMatcher": [
                 "$deno"
