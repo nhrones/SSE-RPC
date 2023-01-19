@@ -1,9 +1,9 @@
-# SSE-RPC
-Async Remote Proceedure Calls, based on Server Sent Events.
+# ARPC-SSE
+Asynchronous Remote Procedure Calls, over Server Sent Events.
 
-The architecture is as follows:
+This service architecture is as follows:
 ## SSE
-  * A client being served must have a minimal SSE capability .        
+A client registers for a service over Server Sent Events .        
 
   
 ## RPC

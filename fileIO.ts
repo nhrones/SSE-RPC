@@ -28,9 +28,9 @@ export const getDirectory = async (path: string): Promise<WalkEntry[]> => {
 
 /** get file content */
 export const getFile = async (cfg: contentCFG): Promise<string> => {
-    const { fileName } = cfg
-    const target = join(ctx.cwd, fileName)
-    if (DEBUG) console.log(`getting - ctx.cwd ${ctx.cwd}, fileName ${fileName}, target ${target}`)
+    const { folder, fileName } = cfg
+    const target = join(folder, fileName)
+    if (DEBUG) console.log(`getting - folder ${folder}, fileName ${fileName}, target ${target}`)
     try {
         return await Deno.readTextFile(target);
     } catch(err) {

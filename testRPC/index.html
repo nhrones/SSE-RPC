@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+   <meta charset="UTF-8">
+   <!-- Suppress browser request for favicon.ico -->
+   <link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;,">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel=stylesheet href=./styles.css>
+   <title>Document</title>
+
 </head>
+
 <body>
-    <button id="getdirBtn">Get Directory</button>
-    <button id="getFileBtn">Get File</button>
-    <button id="saveFileBtn">Save File</button>
-    <pre id="logger"></pre>
-    <script type=module src="./app.js"></script>
+   <div>
+      <button id="getFilesBtn">Get File List</button>
+      <button id="getFileBtn">Get Text File</button>
+      <button id="saveFileBtn">Save Text File</button>
+   </div>
+   <div class="ctnts" contenteditable="true">
+      <!-- <blockquote contenteditable="true"> -->
+         <p id="ctnt"></p>
+     <!-- </blockquote> -->
+   </div>
+   <pre id="logger"></pre>
+   <script type=module src="./app.js"></script>
 </body>
+
 </html>
