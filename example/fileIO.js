@@ -10,7 +10,7 @@ import {
 
 import * as ARPC from './arpcClient.js'
 
-const testFolder = 'testRPC';
+const testFolder = 'example';
 const testFileName = './test.txt';
 
 // when this button is clicked, run an ARPC

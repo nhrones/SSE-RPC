@@ -34,7 +34,7 @@
          "type":"shell",
          "command": "simpleL",
          "args": [
-            "testRPC"
+            "example"
          ],
          "problemMatcher": [
              "$deno"
