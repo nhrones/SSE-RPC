@@ -19,7 +19,7 @@ getFileList.onclick = () => {
    // calls a remote procedure to get list of files from a folder
    ARPC.Call("GetFileList", {
       root: './',
-      folder: 'testRPC',
+      folder: 'example',
    })
       // when the procedure has completed ---
       .then((result) => {
