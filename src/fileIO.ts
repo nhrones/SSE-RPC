@@ -17,7 +17,7 @@ export const getDirectory = async (path: string): Promise<WalkEntry[]> => {
         includeDirs: true,
         followSymlinks: false,
         skip: [/vscode/, /git/]
-    })) {
+    })) { // text files only
         if (entry.name[0] === ".") continue;
         if (entry.name.includes('.png')) continue;
         if (entry.name.includes('.jpg')) continue;
