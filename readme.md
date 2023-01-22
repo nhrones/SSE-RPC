@@ -51,7 +51,7 @@ The client, on receipt of the sse-message, will unpack the response, locate the 
 
 ## Built-in Remote Procedures
 The following are the current built-in procedures.    
-You can see them in action in the example in `/testRPC/ `.
+You can see them in action in the example in /example/ .
  1. `getFileList` - returns the results of a `deno-walk`.
  2. `getFile` - returns the text content of a file.
  3. `saveFile` - saves text content to a file.
