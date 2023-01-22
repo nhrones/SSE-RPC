@@ -9,6 +9,8 @@ A client registers for a service over Server Sent Events .
 ## RPC
   * This service has many built-in Remote Procedures that a client may call with the correct protocol. See the rpc-list below.
   * A client-side rpc-call uses an async registry that returns a promise. When the server eventually responds to the call(sse-onmessage), the client-rpc resolves the promise with a result or an error. 
+ 
+ ![rpc](SSE-BC.png)
   
   ## Protocol
   An RPC call-RpcRequest to the server must use the following protocol:
