@@ -39,6 +39,8 @@ export const Call = (procedure, params) => {
 export const Initialize = (logger = null) => {
    log = logger || console.log
    return new Promise((resolve, reject) => {
+      
+      // this is the SSE client
       const events = new EventSource(serverURL + "/rpc_registration");
       log("CONNECTING");
       events.addEventListener("open", () => {
@@ -59,6 +61,8 @@ export const Initialize = (logger = null) => {
                break;
          }
       });
+      
+      // messages from server (RPC result/error)
       events.addEventListener("message", (e) => {
          const { data } = e;
          const parsed = JSON.parse(data);
