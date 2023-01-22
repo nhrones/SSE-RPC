@@ -1,6 +1,4 @@
 // deno-lint-ignore-file
-//const serverURL = "https://github.com/nhrones/SSE-RPC/blob/master/server.ts"
-//const serverURL = "https://raw.githubusercontent.com/nhrones/SSE-RPC/master/server.ts"
 const serverURL = "http://localhost:9000"
 
 const files = [];
