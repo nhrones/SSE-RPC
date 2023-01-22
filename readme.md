@@ -13,7 +13,7 @@ A client registers for a service over Server Sent Events .
  ![rpc](SSE-BC.png)
   
   ## Protocol
-  An RPC call-RpcRequest to the server must use the following protocol:
+  An RPC call to the server must use the following protocol:
 ```js
 type RpcId = number;
 type RpcProcedure = string;
