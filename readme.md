@@ -69,9 +69,9 @@ The client, on receipt of the sse-message, will unpack the response, locate the 
 ## Built-in Remote Procedures
 The following are the current built-in procedures.    
 
- 1. `getFileList` - returns the results of a `deno-walk`. /* params{ root, folder } */
- 2. `getFile` - returns the text content of a file.       /* params{ folder, name } */
- 3. `saveFile` - saves text content to a file.            /* params{ folder, name, content } */
+ 1. `getFileList` - returns the results of a `deno-walk`. // params{ root, folder }
+ 2. `getFile` - returns the text content of a file.       // params{ folder, name }
+ 3. `saveFile` - saves text content to a file.            // params{ folder, name, content }
  
 You can see these in action in the example application in the included /example folder.   
 (Open the `/example/readme.md` for instructions)
