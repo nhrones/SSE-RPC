@@ -61,7 +61,7 @@ A `raw` client call is performed as:
    });
 ```
 The server will perform the procedure and return either a result or an error response.    
-See: `RpcResponse` above.
+See: `interface RpcResponse` above.
      
 The client, on receipt of the sse-message, will unpack the response, locate the stored promise registered to this `msgID`, and either resolve or reject it depending on the values of `error` and `result`.
 
