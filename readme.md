@@ -1,19 +1,36 @@
-# ARPC-SSE
-Asynchronous Remote Procedure Calls, over Server Sent Events.
+# Async RPC over SSE
+Asynchronous Remote Procedure Calls, implemented with Server Sent Events.
 
 This service architecture is as follows:
 ## SSE
-A client registers for a service over Server Sent Events .        
+Server Sent Events is a client/server service.   
 
+The server listens for registration events from clients.    
+When a client registers, the server sets up a unidirectional stream connection to that client.   
+
+The client side code works almost identically to websockets. A client registers for a connection using an `EventSource`, then handles new messages from the streaming service.       
   
 ## RPC
-  * This service has many built-in Remote Procedures that a client may call with the correct protocol. See the rpc-list below.
+Remote Procedure Calls: A framework to call procedures (methods or commands) on a remote service.   
+
+Our service uses a simplified JSON-RPC model See: `protocol` below.     
+
+RPC allows clients to call procedures/methods as if they where local. This implementaion supports asynchronous method calls. That is, calls to a remote service that return an immediate promise to be resoved after the service returns a result or error. These non-blocking calls help support highly performant UI applications Like DWM-GUI apps.   
+       
+### Difference between RPC and REST  
+RPC was designed for actions, while REST is resource-centric. 
+ - RPC: returns the result of the execution of procedures or commands 
+ - REST: supports domain modeling and the handling of large quantities of data  
+
+## The RPC service
+  * This service has a few built-in Remote Procedures that a client may call with the correct protocol.   
+  See the rpc-list below.
   * A client-side rpc-call uses an async registry that returns a promise. When the server eventually responds to the call(sse-onmessage), the client-rpc resolves the promise with a result or an error. 
  
- ![rpc](SSE-BC.png)
+![rpc](SSE-BC.png)
   
-  ## Protocol
-  An RPC call to the server must use the following protocol:
+## Protocol
+An RPC call to the server must use the following protocol:
 ```js
 type RpcId = number;
 type RpcProcedure = string;
@@ -51,7 +68,7 @@ The client, on receipt of the sse-message, will unpack the response, locate the 
 
 ## Built-in Remote Procedures
 The following are the current built-in procedures.    
-You can see them in action in the example in /example/ .
+You can see them in action in the example in the included `/example`  folder.
  1. `getFileList` - returns the results of a `deno-walk`. /* params{ root, folder } */
  2. `getFile` - returns the text content of a file.       /* params{ folder, name } */
  3. `saveFile` - saves text content to a file.            /* params{ folder, name, content } */
