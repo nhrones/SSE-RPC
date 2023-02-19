@@ -64,7 +64,7 @@ A `raw` client call is performed as:
       body: JSON.stringify({ msgID: msgID, procedure: procedure, params: params }),
    });
 ```
-The server will perform the procedure and return either a result or an error response.    
+The server will perform the procedure and return either a result or an error response to the EventSource.onMessage handler.      
 See: `interface RpcResponse` above.   
 
 The client, on receipt of the sse-message, will unpack the response, locate the stored promise registered to this `msgID`, and either resolve or reject it depending on the values of error and result.    
