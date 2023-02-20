@@ -1,31 +1,43 @@
+/// <reference no-default-lib="true" />
+/// <reference lib="dom" />
+/// <reference lib="deno.ns" />
+
+import { TypedProcedures } from '../../constants.ts'
+
 // deno-lint-ignore-file
 const serverURL = "http://localhost:9000"
 
-const files = [];
-const ctx = {
+const files: string[] = [];
+const _ctx = {
    fileList: files,
    fileName: "",
    folderName: ""
 };
 
 const callbacks = new Map();
-let log;
+let log = console.log;
 let nextMsgID = 0;
 
 /** 
- * Make an Asynchronous Remote Proceedure Call 
- * @returns (promise) this promise has a callback that is stored
- * by ID in a callbacks Set. When this promise resolves or rejects
- * the callback is retrieves by ID and executed by the promise. 
- * */
-export const Call = (procedure, params) => {
+ * Make an Asynchronous Remote Proceedure Call
+ *  
+ * @param {string} procedure - the name of the remote procedure to be called
+ * @param {TypedProcedures[key]} params - appropriately typed parameters for this procedure
+ * 
+ * @returns {Promise} - Promise object has a callback that is stored by ID    
+ *   in a callbacks Set.   
+ *   When this promise resolves or rejects, the callback is retrieves by ID    
+ *   and executed by the promise. 
+ */
+export const Call = <key extends keyof TypedProcedures>(procedure: key, params: TypedProcedures[key]) => {
+
    const msgID = nextMsgID++;
-   log(`ARPC msg ${msgID} called ${procedure}`);
+   log(`RPC msg ${msgID} called ${procedure}`);
    return new Promise((resolve, reject) => {
 
-      callbacks.set(msgID, (error, result) => {
+      callbacks.set(msgID, (error: string | null, result: string | null) => {
          if (error)
-            return reject(new Error(error.message));
+            return reject(new Error(error));
          resolve(result);
       });
       fetch(serverURL + "/", {
@@ -36,10 +48,11 @@ export const Call = (procedure, params) => {
    });
 };
 
-export const Initialize = (logger = null) => {
+// deno-lint-ignore no-explicit-any
+export const Initialize = (logger: (...data: any[]) => void) => {
    log = logger || console.log
    return new Promise((resolve, reject) => {
-      
+
       // this is the SSE client
       const events = new EventSource(serverURL + "/rpc_registration");
       log("CONNECTING");
@@ -61,7 +74,7 @@ export const Initialize = (logger = null) => {
                break;
          }
       });
-      
+
       // messages from server (RPC result/error)
       events.addEventListener("message", (e) => {
          const { data } = e;
@@ -79,14 +92,13 @@ export const Initialize = (logger = null) => {
                   console.log('no callback found for ', msgID)
                   return;
                }
-               
+
                const callback = callbacks.get(msgID);
                callbacks.delete(msgID);
                callback(error, result);
-               
+
             }
          }
       });
    });
 };
-

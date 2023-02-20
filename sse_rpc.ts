@@ -20,13 +20,14 @@ export function registerRPC(req: Request): Response {
 
                 const { msgID, procedure, params } = e.data
                 if (DEBUG) console.log(`sse got - msgID: ${msgID}, procedure: "${procedure}", params: ${JSON.stringify(params)}`)
-                // deno-lint-ignore no-explicit-any
-                let thisError: any = null
+
+                let thisError: string | null = null
                 let thisResult = null
+                
                 // calling remote procedures
                 switch (procedure) {
-                    case 'GetFileList': {
-                        console.log('handling - GetFileList' )
+                    case 'GetDirectory': {
+                        console.log('handling - GetDirectory' )
                         const { root, folder } = params
                         setCWD(root)
                         getDirectory(folder).then(result => {

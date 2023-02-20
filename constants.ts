@@ -26,16 +26,24 @@ export type contentCFG = {
 export type TypedProcedures = {
 
    /** getDirectory event */
-   getDirectory: {path: string},
+   GetDirectory: {
+      root: string,
+      folder: string
+   },
 
    /** getFile event */
-   getFile: contentCFG,
+   GetFile: {    
+      folder: string;
+      fileName: string
+   },
    
    /** Focused state-changed event */
-   saveFile: contentCFG,
+   SaveFile: {
+      folder: string;
+      fileName: string;
+      content: string;
+   },
 }
-
-
 
 export const corsResponse = (body = '') => new Response(body,
     {

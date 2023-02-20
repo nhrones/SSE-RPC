@@ -1,12 +1,16 @@
+/// <reference no-default-lib="true" />
+/// <reference lib="dom" />
+/// <reference lib="deno.ns" />
+
 import {
    log,
-  getFileListBtn,
+   getFileListBtn,
    getFileBtn,
    saveFileBtn,
    outPut,
-} from './dom.js'
+} from './dom.ts'
 
-import * as ARPC from './client/rpcClient.js';
+import * as RPC from './rpcClient.ts';
 
 const testFolder = 'example';
 const testFileName = './test.txt';
@@ -15,7 +19,7 @@ const testFileName = './test.txt';
 getFileListBtn.onclick = () => {
    log(`"Get File List" button clicked!`);
    // calls a remote procedure to get list of files from a folder
-   ARPC.Call("GetFileList", {
+   RPC.Call('GetDirectory', {
       root: './',
       folder: 'example',
    })
@@ -41,18 +45,18 @@ getFileBtn.onclick = () => {
    log(`"Get-File" button clicked!`);
    
    // calls a remote procedure to get a files content 
-   ARPC.Call("GetFile", {
+   RPC.Call("GetFile", {
       folder: testFolder,
       fileName: testFileName,
    })
    .then((result) => {
       if (typeof result === "string") {
-         // shave off the quotation marks
+         // shave off any quotation marks
          if (result.startsWith('"')) {
             result = result.slice(1, result.length - 1);
          }
-         outPut.innerHTML = result
-         saveFile.removeAttribute("disabled", "");
+         if (typeof result === 'string') outPut.innerHTML = result;
+         saveFileBtn.removeAttribute("disabled");
       }
    })
    .catch((e) => log(e));
@@ -62,22 +66,22 @@ getFileBtn.onclick = () => {
 saveFileBtn.onclick = () => {  
    log(`"Save-File" button clicked!`);  
    // calls a remote procedure to save a file
-   ARPC.Call("SaveFile", {
+   RPC.Call("SaveFile", {
       folder: testFolder,
       fileName: testFileName,
-      content: outPut.textContent,
+      content: outPut.textContent as string,
    })
    .then((result) => {
       if (typeof result === "string")
          log("Result - " + result);
          outPut.textContent = '';
-      saveFile.setAttribute("disabled", "");
+      saveFileBtn.setAttribute("disabled", "");
    })
    .catch((e) => log(e));
 };
 
-ARPC.Initialize(log).then(() => {
-   log("Initialized ARPC services!");
+RPC.Initialize(log).then(() => {
+   log("Initialized RPC services!");
 });
 
 log("App started!");
