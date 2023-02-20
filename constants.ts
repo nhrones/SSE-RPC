@@ -3,6 +3,40 @@ export const MINIFY = false
 export const host = "localhost"
 export const port = 9000
 
+
+
+//---------------------------------------------------------
+//  Typed Procedures --------------------------------------
+//---------------------------------------------------------
+/** generic event Handler type */
+// deno-lint-ignore no-explicit-any
+export type Handler<T = any> = (data?: T) => void;
+
+export type contentCFG = {
+   folder: string;
+   fileName: string;
+   content: string;
+}
+/** 
+ * Named Procedure types    
+ * Each procedure-type \<name\> is unique    
+ * Each procedure-type registers a payload-type 
+ * This payload-type is type-checked when coding procedure-calls
+ */
+export type TypedProcedures = {
+
+   /** getDirectory event */
+   getDirectory: {path: string},
+
+   /** getFile event */
+   getFile: contentCFG,
+   
+   /** Focused state-changed event */
+   saveFile: contentCFG,
+}
+
+
+
 export const corsResponse = (body = '') => new Response(body,
     {
         status: 200,

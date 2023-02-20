@@ -1,12 +1,8 @@
 
 import { join, walk } from './deps.ts'
 import type { WalkEntry } from './deps.ts'
-import { ctx, DEBUG } from './constants.ts'
-export type contentCFG = {
-    folder: string;
-    fileName: string;
-    content: string;
-}
+import { contentCFG, ctx, DEBUG } from './constants.ts'
+
 
 
 /** get directory list */
