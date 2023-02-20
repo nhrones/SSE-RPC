@@ -60,7 +60,7 @@ This service can be called `raw`; without the clients async support.
 A `raw` client call is performed as:
 
 ```js
-   fetch("/rpc", {
+   fetch("/", {
       method: "POST",
       body: JSON.stringify({ msgID: msgID, procedure: procedure, params: params }),
    });
