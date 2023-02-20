@@ -29,7 +29,10 @@ let nextMsgID = 0;
  *   When this promise resolves or rejects, the callback is retrieves by ID    
  *   and executed by the promise. 
  */
-export const Call = <key extends keyof TypedProcedures>(procedure: key, params: TypedProcedures[key]) => {
+export const Call = <key extends keyof TypedProcedures>(
+   procedure: key,
+   params: TypedProcedures[key]
+) => {
 
    const msgID = nextMsgID++;
    log(`RPC msg ${msgID} called ${procedure}`);

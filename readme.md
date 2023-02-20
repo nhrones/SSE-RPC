@@ -1,37 +1,57 @@
 # Async RPC over SSE
+
 Asynchronous Remote Procedure Calls, implemented with Server Sent Events.
-   
-This service architecture is as follows:    
+
+This service architecture is as follows:
 
 ![rpc](SSE-BC.png)
 
 ## SSE
-Server Sent Events is a client/server service.   
 
-The server listens for registration events from clients.    
-When a client registers, the server sets up a unidirectional stream connection to that client.   
+Server Sent Events is a client/server service.
 
-The client side code works almost identically to websockets. A client registers for a connection using an `EventSource`, then handles new messages from the streaming service.       
-  
+The server listens for registration events from clients.\
+When a client registers, the server sets up a unidirectional stream connection
+to that client.
+
+The client side code works almost identically to websockets. A client registers
+for a connection using an `EventSource`, then handles new messages from the
+streaming service.
+
 ## RPC
-Remote Procedure Calls: A framework to call procedures (methods or commands) on a remote service.   
 
-Our service uses a simplified JSON-RPC model See: `protocol` below.     
+Remote Procedure Calls: A framework to call procedures (methods or commands) on
+a remote service.
 
-RPC allows clients to call procedures/methods as if they where local. This implementaion supports asynchronous method calls. That is, calls to a remote service that return an immediate promise to be resoved after the service returns a result or error. These non-blocking calls help support highly performant UI applications Like DWM-GUI apps.   
-       
-### Difference between RPC and REST  
-RPC was designed for actions, while REST is resource-centric. 
- - RPC: returns the result of the execution of procedures or commands 
- - REST: supports domain modeling and the handling of large quantities of data  
+Our service uses a simplified JSON-RPC model See: `protocol` below.
+
+RPC allows clients to call procedures/methods as if they where local. This
+implementaion supports asynchronous method calls. That is, calls to a remote
+service that return an immediate promise to be resoved after the service returns
+a result or error. These non-blocking calls help support highly performant UI
+applications Like DWM-GUI apps.
+
+### Difference between RPC and REST
+
+RPC was designed for actions, while REST is resource-centric.
+
+- RPC: returns the result of the execution of procedures or commands
+- REST: supports domain modeling and the handling of large quantities of data
 
 ## The RPC service
-  * This service has a few built-in Remote Procedures that a client may call with the correct protocol.   
+
+- This service has a few built-in Remote Procedures that a client may call with
+  the correct protocol.
+  \
   See the rpc-list below.
-  * A client-side rpc-call uses an async registry that returns a promise. When the server eventually responds to the call(sse-onmessage), the client-rpc resolves the promise with a result or an error. 
+- A client-side rpc-call uses an async registry that returns a promise. When the
+  server eventually responds to the call(sse-onmessage), the client-rpc resolves
+  the promise with a result or an error.
 
 ## Protocol
+
 An RPC call to the server must use the following protocol:
+
 ```js
 type RpcId = number;
 type RpcProcedure = "GetDirectory" | "GetFile" | "SaveFile" ;
@@ -55,30 +75,41 @@ type JsonArray = JsonValue[];
 type JsonValue = JsonPrimitive | JsonObject | JsonArray;
 ```
 
-This service can be called `raw`; without the clients async support. 
-    
+This service can be called `raw`; without the clients async support.
+
 A `raw` client call is performed as:
 
 ```js
-   fetch("/", {
-      method: "POST",
-      body: JSON.stringify({ msgID: msgID, procedure: procedure, params: params }),
-   });
+fetch("/", {
+  method: "POST",
+  body: JSON.stringify(
+    {
+      msgID: msgID,
+      procedure: procedure,
+      params: params,
+    },
+  ),
+});
 ```
-The server will perform the procedure and return either a result or an error response to the EventSource.onMessage handler.      
-See: `interface RpcResponse` above.   
 
-The client, on receipt of the sse-message, will unpack the response, locate the stored promise registered to this `msgID`, and either resolve or reject it depending on the values of error and result.    
-See: `/example/src/rpcClient.ts`    
- 
+The server will perform the procedure and return either a result or an error
+response to the EventSource.onMessage handler.\
+See: `interface RpcResponse` above.
 
+The client, on receipt of the sse-message, will unpack the response, locate the
+stored promise registered to this `msgID`, and either resolve or reject it
+depending on the values of error and result.\
+See: `/example/src/rpcClient.ts`
 
 ## Built-in Remote Procedures
-The following are the current built-in procedures.    
 
- 1. `GetDirectory` - returns the results of a `deno-walk`. // params{ root, folder }
- 2. `GetFile` - returns the text content of a file.        // params{ folder, name }
- 3. `SaveFile` - saves text content to a file.             // params{ folder, name, content }
- 
-You can see these in action in the example application in the included /example folder.   
+The following are the current built-in procedures.
+
+1. `GetDirectory` - returns the results of a `deno-walk`. // params{ root,
+   folder }
+2. `GetFile` - returns the text content of a file. // params{ folder, name }
+3. `SaveFile` - saves text content to a file. // params{ folder, name, content }
+
+You can see these in action in the example application in the included /example
+folder.\
 (Open the `/example/readme.md` for instructions)
