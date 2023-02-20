@@ -11,6 +11,10 @@ From the project root, open a terminal and enter the following:
 ```
 $ deno run -A --unstable server.ts
 ```
+Or, you could run the server directly from this git repo:
+```
+deno run -Ar --unstable https://raw.githubusercontent.com/nhrones/SSE-RPC/master/server.ts
+```
 Then, with the RPC service running, run the application in the ./example folder   
 using either the `Live Server` vscode extension, or any other dev-server    
 that supports js modules.
