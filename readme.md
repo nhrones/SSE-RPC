@@ -1,7 +1,10 @@
 # Async RPC over SSE
 Asynchronous Remote Procedure Calls, implemented with Server Sent Events.
+   
+This service architecture is as follows:    
 
-This service architecture is as follows:
+![rpc](SSE-BC.png)
+
 ## SSE
 Server Sent Events is a client/server service.   
 
@@ -26,9 +29,7 @@ RPC was designed for actions, while REST is resource-centric.
   * This service has a few built-in Remote Procedures that a client may call with the correct protocol.   
   See the rpc-list below.
   * A client-side rpc-call uses an async registry that returns a promise. When the server eventually responds to the call(sse-onmessage), the client-rpc resolves the promise with a result or an error. 
- 
-![rpc](SSE-BC.png)
-  
+
 ## Protocol
 An RPC call to the server must use the following protocol:
 ```js
