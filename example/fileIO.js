@@ -1,18 +1,18 @@
 import {
    log,
-   getFileList,
-   getFile,
-   saveFile,
+  getFileListBtn,
+   getFileBtn,
+   saveFileBtn,
    outPut,
 } from './dom.js'
 
-import * as ARPC from './client/arpcClient.js';
+import * as ARPC from './client/rpcClient.js';
 
 const testFolder = 'example';
 const testFileName = './test.txt';
 
 // when this button is clicked, run an ARPC
-getFileList.onclick = () => {
+getFileListBtn.onclick = () => {
    log(`"Get File List" button clicked!`);
    // calls a remote procedure to get list of files from a folder
    ARPC.Call("GetFileList", {
@@ -36,7 +36,7 @@ getFileList.onclick = () => {
 };
 
 // get the file content
-getFile.onclick = () => {
+getFileBtn.onclick = () => {
    
    log(`"Get-File" button clicked!`);
    
@@ -59,7 +59,7 @@ getFile.onclick = () => {
 };
 
 // save the file content
-saveFile.onclick = () => {  
+saveFileBtn.onclick = () => {  
    log(`"Save-File" button clicked!`);  
    // calls a remote procedure to save a file
    ARPC.Call("SaveFile", {
