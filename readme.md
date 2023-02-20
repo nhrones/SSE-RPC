@@ -34,7 +34,7 @@ RPC was designed for actions, while REST is resource-centric.
 An RPC call to the server must use the following protocol:
 ```js
 type RpcId = number;
-type RpcProcedure = "getFileList" | "getFile" | "saveFile" ;
+type RpcProcedure = "GetDirectory" | "GetFile" | "SaveFile" ;
 type RpcParams = JsonArray | JsonObject;
 
 interface RpcRequest {
