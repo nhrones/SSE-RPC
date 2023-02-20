@@ -1,7 +1,8 @@
 # RPC Example Client app
-This simple web app uses the RPC service to do file-io.
-The app code was transpiled and bundled using esbuild.
-The clients Typescript source is in /example/src.
+This simple web app uses the RPC service to do file-io.    
+The app code was transpiled and bundled using esbuild.    
+The clients Typescript source is in /example/src.    
+The bundle starts at /src/main.ts
 
 ## Run It 
 
